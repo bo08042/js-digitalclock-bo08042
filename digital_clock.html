@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Instagram Timer</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="img/favicon.ico"/>
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css?family=Heebo&display=swap" rel="stylesheet">
+    <style>
+        body{
+            margin: 0;
+            font-family: 'Heebo','微軟正黑體', sans-serif;
+            color: #444;
+        }
+        .bg{
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(rgb(255, 252, 220), rgb(222, 188, 210));
+        }
+        .container{
+            width: 100%;
+            height: 97.5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        img:hover{
+            cursor: pointer;
+        }
+        .footer{
+            text-align: center;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.35);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg">
+        <div class="container">
+            <img src="img/instagram-png.png" title="2010年10月06日首次發布" width="200px" height="auto" onclick="goto()">
+            <p>已發布　
+                <span id="time"></span>
+            </p>
+        </div>
+        <div class="footer">
+            Copyright ©2020 Bobo 
+        </div>
+    </div>
+
+    <script>
+        function chk0(num){
+            return (num<10)?"0"+num:num;
+        }
+
+        function runtime(){
+            let s_time=new Date("2010-10-06T00:00:00");
+            let e_time=new Date();
+
+            tmin=s_time.getTime();
+            tmax=e_time.getTime();
+
+            btw=tmax-tmin;
+            bsec=Math.floor((btw/1000)%60);
+            bmin=Math.floor((btw/1000/60)%60);
+            bhur=Math.floor((btw/1000/60/60)%24);
+            bday=Math.floor((btw/1000/60/60/24)%365);
+            byear=Math.floor((btw/1000/60/60/24)/365);
+
+            document.getElementById('time').textContent=`${byear} 年 ${chk0(bday)} 天 ${chk0(bhur)} 時 ${chk0(bmin)} 分 ${chk0(bsec)} 秒`;
+
+            setTimeout(runtime,1000);
+        }
+        runtime();
+
+        function goto(){
+            open("https://www.instagram.com/","_blank");
+        }
+    </script>
+</body>
+</html>
